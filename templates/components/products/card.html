@@ -1,6 +1,7 @@
 <article
     class="card
     {{#if alternate}} card--alternate{{/if}}"
+    data-current-page="{{current_page}}"
     data-test="card-{{id}}"
     {{#if settings.data_tag_enabled}}
         data-event-type="{{event}}"
