@@ -1,7 +1,9 @@
+{{assignVar "infinite_position" (sum (multiply (subtract current_page 1) items_per_page) position)}}
 <article
     class="card
     {{#if alternate}} card--alternate{{/if}}"
     data-current-page="{{current_page}}"
+    data-infinite-position="{{getVar "infinite_position"}}"
     data-test="card-{{id}}"
     {{#if settings.data_tag_enabled}}
         data-event-type="{{event}}"
