@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ locale_name }}">
     <head>
+        {{#if currency_selector.active_currency_code '==' 'AUD'}}
+        {{assignVar 'nzd_switch_url' currency_selector.currencies.1.switch_url}}
+        <script>
+            console.log('Current currency is AUD... select NZD instead.')
+            const nzd_switch_url = "{{{getVar 'nzd_switch_url'}}}"
+            window.location = nzd_switch_url;
+        </script>
+        {{/if}}
         <title>{{ head.title }}</title>
         {{{ resourceHints }}}
         {{{ head.meta_tags }}}
