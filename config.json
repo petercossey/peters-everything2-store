@@ -46,18 +46,18 @@
       "store_locales": [
       {
         "lang": "en",
-        "channel_id": 1,
-        "store_hash": "foobar"
+        "channel_id": 4142422,
+        "store_hash": "abc123"
       },
       {
         "lang": "es",
-        "channel_id": 1,
-        "store_hash": "foobar"
+        "channel_id": 1274724,
+        "store_hash": "def123"
       },
       {
         "lang": "fr",
         "channel_id": 1,
-        "store_hash": "foobar"
+        "store_hash": "xyz123"
       }
     ],
     "channels": [
