@@ -26,6 +26,26 @@ blog:
     {{/each}}
 
 <div class="main full">
+    <h3>locale_name</h3>
+    <code>
+      {{{json locale_name}}}
+    </code>
+    <h3>theme_settings.store_locales</h3>
+    <code>
+      {{{json theme_settings.store_locales}}}
+    </code>
+    <h3>#each theme_settings.store_locales</h3>
+    <ul>
+      {{#each theme_settings.store_locales}}
+        <li>
+          <pre>
+            lang: {{this.lang}}
+            channel_id: {{this.channel_id}}
+            store_hash: {{this.store_hash}}
+          </pre>
+        </li>
+      {{/each}}
+    </ul>
     {{#if products.featured}}
         {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
     {{/if}}

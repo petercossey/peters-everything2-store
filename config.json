@@ -43,6 +43,23 @@
     "Firefox ESR"
   ],
   "settings": {
+      "store_locales": [
+      {
+        "lang": "en",
+        "channel_id": 1,
+        "store_hash": "foobar"
+      },
+      {
+        "lang": "es",
+        "channel_id": 1,
+        "store_hash": "foobar"
+      },
+      {
+        "lang": "fr",
+        "channel_id": 1,
+        "store_hash": "foobar"
+      }
+    ],
     "channels": [
       {
         "id": 1,
