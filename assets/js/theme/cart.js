@@ -290,39 +290,47 @@ export default class Cart extends PageManager {
         const $couponContainer = $('.coupon-code');
         const $couponForm = $('.coupon-form');
         const $codeInput = $('[name="couponcode"]', $couponForm);
-
+    
         $('.coupon-code-add').on('click', event => {
             event.preventDefault();
-
+    
             $(event.currentTarget).hide();
             $couponContainer.show();
             $couponContainer.attr('aria-hidden', false);
             $('.coupon-code-cancel').show();
             $codeInput.trigger('focus');
         });
-
+    
         $('.coupon-code-cancel').on('click', event => {
             event.preventDefault();
-
+    
             $couponContainer.hide();
             $couponContainer.attr('aria-hidden', true);
             $('.coupon-code-cancel').hide();
             $('.coupon-code-add').show();
         });
-
+    
         $couponForm.on('submit', event => {
             const code = $codeInput.val();
-
+    
             event.preventDefault();
-
+    
             // Empty code
             if (!code) {
                 return showAlertModal($codeInput.data('error'));
             }
-
+    
             utils.api.cart.applyCode(code, (err, response) => {
                 if (response.data.status === 'success') {
-                    this.refreshContent();
+                    // Show a success message
+                    showAlertModal('Coupon code applied successfully!', {
+                        icon: 'success',
+                        showCancelButton: false,
+                        onConfirm: () => {
+                            // Reload the window after the user clicks OK
+                            window.location.reload();
+                        },
+                    });
                 } else {
                     showAlertModal(response.data.errors.join('\n'));
                 }
