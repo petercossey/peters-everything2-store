@@ -4,6 +4,44 @@ cart: true
 {{inject 'cancelButtonText' (lang 'common.cancel')}}
 {{#partial "page"}}
 {{inject 'invalidEntryMessage' (lang 'cart.invalid_entry_message')}}
+
+{{assignVar 'hasFreeGiftProxy' 0}}
+{{assignVar 'freeGiftOptions' 0}}
+{{assignVar 'hasFreeGift' 0}}
+{{#each cart.items}}
+  {{#if this.sku '===' 'GIFT-PROXY'}}
+    {{assignVar 'hasFreeGiftProxy' 1}}
+    {{#filter this.custom_fields "Gift options" property="name"}}
+      {{assignVar 'freeGiftOptions' this.value}}
+    {{/filter}}
+  {{/if}}
+{{/each}}
+{{#if (getVar 'hasFreeGiftProxy') '===' 1}}
+  {{#each cart.items}}
+    {{#inArray (split (getVar 'freeGiftOptions') ',') this.sku}}
+      {{assignVar 'hasFreeGift' 1}}
+    {{/inArray}}
+  {{/each}}
+{{/if}}
+<pre>
+hasFreeGiftProxy: {{getVar 'hasFreeGiftProxy'}}
+freeGiftOptions: {{getVar 'freeGiftOptions'}}
+hasFreeGift: {{getVar 'hasFreeGift'}}
+
+// IF hasFreeGiftProxy is true AND hasFreeGift is false then prompt customer to choose free gifts.
+// Add to cart URLs, e.g. `cart.php?action=add&sku=xlredtshirt`
+</pre>
+
+{{#and (if (getVar 'hasFreeGiftProxy')) (unless (getVar 'hasFreeGift'))}}
+<p>
+  <ul>
+    {{#each (split (getVar 'freeGiftOptions' ','))}}
+      <li><a href="{{settings.secure_base_url}}/cart.php?action=add&sku={{this}}">Add free gift {{this}}</a></li>
+    {{/each}}
+  </ul>
+</p>
+{{/and}}
+
 <div class="page">
 
     <div class="page-content" data-cart>
